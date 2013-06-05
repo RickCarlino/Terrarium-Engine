@@ -63,7 +63,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>The constructor expects you to pass it an object that contains all of its options. It will go with presets if you do not specify anything</p>
+              <p>The constructor expects you to pass it an object that contains all of its options. Uses presets if not specified.</p>
 
             </div>
             
@@ -78,11 +78,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Stores the options parameters for later use by methods such as reset()</p>
+              <p>The population is a collection of entities within the current environment. All objects in the Array should respond to onTick().</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="property">@options</span> = options</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="property">@population</span> = options.population ? []</pre></div></div>
             
         </li>
         
@@ -93,11 +93,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>The population is a collection of entities within the current environment. All objects in the Array should respond to onTick().</p>
+              <p>Speed that the tick method will fire off at, in milliseconds.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="property">@population</span> = options.population ? []</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="property">@tickSpeed</span> = options.tickSpeed ? <span class="number">2000</span></pre></div></div>
             
         </li>
         
@@ -108,11 +108,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>Speed that the tick method will fire off at, in millisecs.</p>
+              <p>A reference point that is incremented on every tick().</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="property">@tickSpeed</span> = options.tickSpeed ? <span class="number">2000</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="property">@date</span> = <span class="number">0</span></pre></div></div>
             
         </li>
         
@@ -123,15 +123,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>A reference point that is incremented on every tick()</p>
+              <p>store current state so that reset() has a reference point of what the constructors parameters were.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="property">@date</span> = <span class="number">0</span>
-  tick: =&gt;
-    console.log <span class="string">"Simulator is running. The in-simulation date is: <span class="subst">#{@date}</span>."</span>
-    <span class="keyword">for</span> entity <span class="keyword">in</span> <span class="property">@population</span>
-      console.log <span class="string">"Ticking <span class="subst">#{entity.name}</span>"</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="property">@originalOptions</span> = {<span class="property">@population</span>, <span class="property">@tickSpeed</span>}</pre></div></div>
             
         </li>
         
@@ -142,14 +138,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>Gracefully handle objects that don&#39;t respond to onTick()</p>
+              <p>return &#39;this&#39;</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">try</span>
-        entity.onTick()
-      <span class="keyword">catch</span> e
-        <span class="literal">null</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>    @
+  tick: =&gt;</pre></div></div>
             
         </li>
         
@@ -160,13 +154,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>increment the date by 1 after the tick is completed</p>
+              <p>The tick event is called by the simulation timer.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    ++<span class="property">@date</span>
-  start: =&gt;
-    <span class="keyword">delete</span> <span class="property">@timerId</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">for</span> entity <span class="keyword">in</span> <span class="property">@population</span>
+      <span class="keyword">try</span></pre></div></div>
             
         </li>
         
@@ -176,6 +169,69 @@
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>notify each entity that they have been activated for this tick
+onTick() should fire off all time-based events for entities via custom logic</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        entity.onTick()
+      <span class="keyword">catch</span> e</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Gracefully handle objects that don&#39;t respond to onTick()</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="literal">null</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>increment the date by 1 after the tick is completed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    ++<span class="property">@date</span>
+  start: =&gt;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>clear the timerId if there was one set already.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">delete</span> <span class="property">@timerId</span> <span class="keyword">if</span> <span class="property">@timerId</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>TimerId is stored so that we can reference it to pause or stop later</p>
 
@@ -188,50 +244,82 @@
         </li>
         
         
-        <li id="section-12">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>return true if it stored the timerId, false otherwise</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">if</span> <span class="property">@timerId</span>
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">if</span> <span class="property">@timerId</span> &gt;= <span class="number">0</span>
     <span class="literal">false</span>
-  stop: -&gt;
-    clearInterval(<span class="property">@timerId</span>)
+  stop: -&gt;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>halts execution of the simulation. Does not alter state of environment.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    clearInterval(<span class="property">@timerId</span>)
     <span class="literal">true</span>
   reset: -&gt;</pre></div></div>
             
         </li>
         
         
-        <li id="section-13">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <p>a stub</p>
+              <p>Stops the simulation and brings things back to the way they were on instantiation</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="literal">null</span>
-  populationSize: -&gt;
-    <span class="property">@population</span>.length</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="property">@stop</span>()
+    <span class="property">@population</span> = <span class="property">@originalOptions</span>.population
+    <span class="property">@tickSpeed</span> = <span class="property">@originalOptions</span>.tickSpeed
+    <span class="property">@date</span> = <span class="number">0</span>
+    <span class="literal">true</span>
+  populationSize: -&gt;</pre></div></div>
             
         </li>
         
         
-        <li id="section-14">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
-              <p>An Entity is any thing that interacts with an environment.</p>
+              <p>dynamically indicates how many entities exist</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="property">@population</span>.length</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>An Entity is anything that interacts with an environment.</p>
 
             </div>
             
@@ -240,11 +328,11 @@
         </li>
         
         
-        <li id="section-15">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>Ensure that an environment has been spcified for the entity in the options parameter..</p>
 
@@ -255,7 +343,6 @@
       <span class="property">@environment</span> = options.environment
       <span class="property">@environment</span>.population.push @
       <span class="property">@age</span> = <span class="number">0</span>
-      console.log <span class="string">"@environment.populationSize()...<span class="subst">#{@environment.population}</span>"</span>
       <span class="property">@name</span> = options.name ? <span class="string">"Entity<span class="subst">#{@environment.populationSize() + <span class="number">1</span>}</span>"</span>
     <span class="keyword">catch</span> e
       console.error <span class="string">'Entities may not exist outside of an  environment. You must specify the environment on instantiation.'</span>
@@ -265,27 +352,26 @@
         </li>
         
         
-        <li id="section-16">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>Increments the entities age by one on every tick. Make sure you call super if you override this in derived classes.</p>
+              <p>Increments the entities age by one on every tick. Make sure you call super if you override this in a derived classes.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    ++<span class="property">@age</span>
-    console.log <span class="string">"<span class="subst">#{@name}</span> is <span class="subst">#{@age}</span> ticks old"</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>    ++<span class="property">@age</span></pre></div></div>
             
         </li>
         
         
-        <li id="section-17">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>Ensure that the Entity is removed from the population when no longer needed. Prevents the tick() event from calling old Entities.</p>
 
