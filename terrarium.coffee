@@ -1,10 +1,8 @@
-#Terrarium Engine
-#=================
-#An event simulation engine written by Rick Carlino
-#--------------------------------------------------
-####Licensed under the MIT license.
-
-
+#Terrarium
+#=========
+#A simple simulation engine
+#--------------------------
+#### (c) 2013, Rick Carlino. Licensed under the MIT license.
 #An environment is a container that holds all entities involved in the simulation.
 class @Environment
   #The constructor expects you to pass it an object that contains all of its options. Uses presets if not specified.
@@ -67,11 +65,9 @@ class @Entity
       @name = options.name ? "Entity#{@environment.populationSize() + 1}"
     catch e
       console.error 'Entities may not exist outside of an  environment. You must specify the environment on instantiation.'
-
   onTick: =>
     #Increments the entities age by one on every tick. Make sure you call super if you override this in a derived classes.
     ++@age
-
   #Ensure that the Entity is removed from the population when no longer needed. Prevents the tick() event from calling old Entities.
   destroy: ->
     destroyThisIndex = @environment.population.indexOf(@)
