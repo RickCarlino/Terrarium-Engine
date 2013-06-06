@@ -1,8 +1,6 @@
 Terrarium
 ==========
-
 A simple simulation engine
---------------------------
 
 (c) 2013, Rick Carlino. See enclosed MIT license. Pull requests welcome ;-)
 
