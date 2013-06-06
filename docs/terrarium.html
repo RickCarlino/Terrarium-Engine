@@ -323,7 +323,8 @@ onTick() should fire off all time-based events for entities via custom logic</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="class"><span class="keyword">class</span> @<span class="title">Entity</span></span></pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="class"><span class="keyword">class</span> @<span class="title">Entity</span></span>
+  constructor: (options = {}) -&gt;</pre></div></div>
             
         </li>
         
@@ -338,15 +339,11 @@ onTick() should fire off all time-based events for entities via custom logic</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  constructor: (options) -&gt;
-    <span class="keyword">try</span>
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">try</span>
       <span class="property">@environment</span> = options.environment
-      <span class="property">@environment</span>.population.push @
-      <span class="property">@age</span> = <span class="number">0</span>
-      <span class="property">@name</span> = options.name ? <span class="string">"Entity<span class="subst">#{@environment.populationSize() + <span class="number">1</span>}</span>"</span>
     <span class="keyword">catch</span> e
       console.error <span class="string">'Entities may not exist outside of an  environment. You must specify the environment on instantiation.'</span>
-  onTick: =&gt;</pre></div></div>
+      <span class="keyword">delete</span> @</pre></div></div>
             
         </li>
         
@@ -357,11 +354,15 @@ onTick() should fire off all time-based events for entities via custom logic</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>Increments the entities age by one on every tick. Make sure you call super if you override this in a derived classes.</p>
+              <p>Ensure that the Entity actually gets put into said Environment.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    ++<span class="property">@age</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">try</span>
+      <span class="property">@environment</span>.population.push @
+    <span class="keyword">catch</span> e
+      console.error <span class="string">'Was unable to push entity into environment.'</span>
+      <span class="keyword">delete</span> @</pre></div></div>
             
         </li>
         
@@ -372,14 +373,62 @@ onTick() should fire off all time-based events for entities via custom logic</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <p>Ensure that the Entity is removed from the population when no longer needed. Prevents the tick() event from calling old Entities.</p>
+              <p>Set the entities name and age, which are used for reference purposes.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="property">@age</span>     = options.age ? <span class="number">0</span>
+    <span class="property">@name</span>    = options.name ? <span class="string">"Entity<span class="subst">#{@environment.populationSize() + <span class="number">1</span>}</span>"</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>Save these options to a variable so that I can implement a reset() method. Not yet implemented. Pull requests welcome ;-)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="property">@options</span> = {<span class="property">@age</span>, <span class="property">@name</span>, <span class="property">@environment</span>}
+
+  onTick: =&gt;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>Increments the entities age by one on every tick. Make sure you call super if you override this in a derived classes.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    ++<span class="property">@age</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Ensure that the Entity is removed from the population and deleted when no longer needed. Prevents the tick() event from calling old Entities.</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>  destroy: -&gt;
     destroyThisIndex = <span class="property">@environment</span>.population.indexOf(@)
     <span class="property">@environment</span>.population.pop(destroyThisIndex)
-    <span class="literal">null</span></pre></div></div>
+    <span class="keyword">delete</span> @</pre></div></div>
             
         </li>
         

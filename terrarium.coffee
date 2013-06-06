@@ -56,20 +56,30 @@ class @Environment
 
 #An Entity is anything that interacts with an environment.
 class @Entity
-  #Ensure that an environment has been spcified for the entity in the options parameter..
-  constructor: (options) ->
+  constructor: (options = {}) ->
+    #Ensure that an environment has been spcified for the entity in the options parameter..
     try
       @environment = options.environment
-      @environment.population.push @
-      @age = 0
-      @name = options.name ? "Entity#{@environment.populationSize() + 1}"
     catch e
       console.error 'Entities may not exist outside of an  environment. You must specify the environment on instantiation.'
+      delete @
+    #Ensure that the Entity actually gets put into said Environment.
+    try
+      @environment.population.push @
+    catch e
+      console.error 'Was unable to push entity into environment.'
+      delete @
+    #Set the entities name and age, which are used for reference purposes.
+    @age     = options.age ? 0
+    @name    = options.name ? "Entity#{@environment.populationSize() + 1}"
+    #Save these options to a variable so that I can implement a reset() method. Not yet implemented. Pull requests welcome ;-)
+    @options = {@age, @name, @environment}
+
   onTick: =>
     #Increments the entities age by one on every tick. Make sure you call super if you override this in a derived classes.
     ++@age
-  #Ensure that the Entity is removed from the population when no longer needed. Prevents the tick() event from calling old Entities.
+  #Ensure that the Entity is removed from the population and deleted when no longer needed. Prevents the tick() event from calling old Entities.
   destroy: ->
     destroyThisIndex = @environment.population.indexOf(@)
     @environment.population.pop(destroyThisIndex)
-    null
+    delete @
