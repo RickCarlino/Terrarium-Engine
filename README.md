@@ -43,5 +43,3 @@ Player2 (Random): 339
 Player1 (Rock Only): 339
 
 Player2 (Random): 318
-
-## Goodness of fit for Example 1 (Thanks, Jason Goldberger)
