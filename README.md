@@ -28,7 +28,8 @@ Written with Coffeescript, Mocha / ShouldJS (for testing) and docco for document
 
 Example 1 - Rock Paper Scissors
 ===============================
-/examples/rock_paper_scissors.coffee is a very simple example of comparing between two strategies. In this case, we have two strategies: the first is to throw a random hand every round and the second is to only throw rock.
+/examples/rock_paper_scissors.coffee is a very simple example of comparing between two strategies. In this case, we have two strategies: the first is to throw a random hand every round and the second is to only throw rock. Obviously, this will return a 'tie' if allowed to run infinitely, but it shows a good example of how to extend the Entity and Environment classes.
+
 
 Results after 1000 rounds (1st iteration):
 ------------------------------------------
