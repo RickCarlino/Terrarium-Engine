@@ -33,19 +33,23 @@ Example 1 - Rock Paper Scissors
 Results after 1000 rounds (1st iteration):
 ------------------------------------------
 Player1 (Rock Only): 326
+
 Player2 (Random): 342
 
 Results after 1000 rounds (2nd iteration):
 ------------------------------------------
 Player1 (Rock Only): 301
+
 Player2 (Random): 373
 
 Results after 1000 rounds (3rd iteration):
 ------------------------------------------
 Player1 (Rock Only): 340
+
 Player2 (Random): 339
 
 Results after 1000 rounds (4th iteration):
 ------------------------------------------
 Player1 (Rock Only): 339
+
 Player2 (Random): 318
