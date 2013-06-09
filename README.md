@@ -10,7 +10,7 @@ This is a side project I am writing as a simulation engine for turn based games.
 
 Concepts
 --------
-The codebase provides two classes, which are intended to be used for derived classes.
+The codebase provides two classes, which are intended to be used for derived classes. My goal is to make this project DOM and Application agnostic, with a bias
 
 Environments
 ------------
@@ -25,3 +25,27 @@ Once the Environment is start()ed, it will continuously cycle through each Entit
 Technical stuff
 ---------------
 Written with Coffeescript, Mocha / ShouldJS (for testing) and docco for documentation.
+
+Example 1 - Rock Paper Scissors
+===============================
+/examples/rock_paper_scissors.coffee is a very simple example of comparing between two strategies. In this case, we have two strategies: the first is to throw a random hand every round and the second is to only throw rock.
+
+Results after 1000 rounds (1st iteration):
+------------------------------------------
+Player1 (Rock Only): 326
+Player2 (Random): 342
+
+Results after 1000 rounds (2nd iteration):
+------------------------------------------
+Player1 (Rock Only): 301
+Player2 (Random): 373
+
+Results after 1000 rounds (3rd iteration):
+------------------------------------------
+Player1 (Rock Only): 340
+Player2 (Random): 339
+
+Results after 1000 rounds (4th iteration):
+------------------------------------------
+Player1 (Rock Only): 339
+Player2 (Random): 318

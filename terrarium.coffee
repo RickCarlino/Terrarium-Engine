@@ -17,18 +17,31 @@ class @Environment
     @originalOptions = {@population, @tickSpeed}
     #return 'this'
     @
+  beforeTick: (results) ->
+    #This is a stub callback. Override it in your implementation. Gets called before tick. Last ticks results get passed to it.
+    null
+  afterTick: (results) ->
+    #This is a stub callback . Override it in your implementation.
+    null
+  #The tick event is called by the simulation timer once per iteration.
   tick: =>
-    #The tick event is called by the simulation timer.
+    #clear out the results from last tick
+    @beforeTick(@results) if @results
+    @results = []
     for entity in @population
       try
         #notify each entity that they have been activated for this tick
         #onTick() should fire off all time-based events for entities via custom logic
-        entity.onTick()
+        #onTick can also optionally have a return value, which will be saved into @results for analysis (if you implement such functionality)
+        #If you want to log the results of your onTick() call, make sure you add a return value.
+        result = entity.onTick()
+        @results.push result
       catch e
         #Gracefully handle objects that don't respond to onTick()
         null
     #increment the date by 1 after the tick is completed
     ++@date
+    @afterTick(@results) if @results
   start: =>
     #clear the timerId if there was one set already.
     delete @timerId if @timerId
