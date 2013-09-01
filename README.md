@@ -7,7 +7,7 @@
 This is a side project I am writing as a simulation engine for turn based games. It slightly resembles a discrete event simulation (DES) engine, but much more simple.
 
 #### Concepts
-The codebase provides two classes, which are intended to be used for derived classes. My goal is to make this project DOM and Application agnostic, with a bias
+The codebase provides two classes, which are intended to be used for derived classes. My goal is to make this project DOM and Application agnostic. I have a bias towards turn based simulation when it is not possible to be application agnostic.
 
 #### Environments
 The first class is 'Environment', which represents a container for all events and also controls the execution of callbacks to pieces of the simulation. This would typically encompass concepts such as a 'world' or single instance of a game in progress.
