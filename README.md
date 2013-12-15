@@ -43,3 +43,7 @@ Player2 (Random): 339
 Player1 (Rock Only): 339
 
 Player2 (Random): 318
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rickcarlino/terrarium-engine/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
