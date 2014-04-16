@@ -3,15 +3,23 @@
 
   this.Environment = (function() {
     function Environment(options) {
-      var _ref, _ref1;
+      var _ref;
       if (options == null) {
-        options = {};
+        options = {
+          population: this.population,
+          tickSpeed: this.tickSpeed,
+          date: this.date
+        };
       }
       this.start = __bind(this.start, this);
       this.tick = __bind(this.tick, this);
-      this.population = (_ref = options.population) != null ? _ref : [];
-      this.tickSpeed = (_ref1 = options.tickSpeed) != null ? _ref1 : 2000;
-      this.date = 0;
+      if (this.population == null) {
+        this.population = [];
+      }
+      this.tickSpeed = (_ref = options.tickSpeed) != null ? _ref : 2000;
+      if (this.date == null) {
+        this.date = 0;
+      }
       this.originalOptions = {
         population: this.population,
         tickSpeed: this.tickSpeed

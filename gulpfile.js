@@ -12,8 +12,13 @@ gulp.task('test', function() {
       globals: {
         should: require('should')
       }
-    }));
+    })).on('error', function handleError(err) {
+      console.log(err.toString());
+      this.emit('end');
+    });
 });
+
+
 
 gulp.task('coffee', function() {
   gulp.src(['./**/*.coffee', '!./node_modules/**'])

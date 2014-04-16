@@ -6,17 +6,17 @@
 #An environment is a container that holds all entities involved in the simulation.
 class @Environment
   #The constructor expects you to pass it an object that contains all of its options. Uses presets if not specified.
-  constructor: (options = {}) ->
+  constructor: (options = {@population, @tickSpeed, @date}) ->
     #The population is a collection of entities within the current environment. All objects in the Array should respond to onTick().
-    @population = options.population ? []
+    @population ?= []
     #Speed that the tick method will fire off at, in milliseconds.
     @tickSpeed = options.tickSpeed ? 2000
     #A reference point that is incremented on every tick().
-    @date = 0
+    @date ?= 0
     #store current state so that reset() has a reference point of what the constructors parameters were.
     @originalOptions = {@population, @tickSpeed}
     #return 'this'
-    @
+    this
   beforeTick: (results) ->
     #This is a stub callback. Override it in your implementation. Gets called before tick. Last ticks results get passed to it.
     null

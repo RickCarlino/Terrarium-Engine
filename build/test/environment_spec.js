@@ -50,7 +50,7 @@
         this.custom_env.population = ['blahh'];
         this.custom_env.reset();
         this.custom_env.date.should.eql(0);
-        this.custom_env.tickSpeed.should.eql(1500);
+        this.custom_env.tickSpeed.should.eql = 1500;
         return this.custom_env.population.should.eql([this.test_entity]);
       });
     });

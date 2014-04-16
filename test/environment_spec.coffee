@@ -33,12 +33,12 @@ describe 'Environment', ->
 
   describe 'reset()', ->
     it 'goes to original state from instantiation', ->
-      @custom_env.date= 100
-      @custom_env.tickSpeed=  500
-      @custom_env.population= ['blahh']
+      @custom_env.date = 100
+      @custom_env.tickSpeed =  500
+      @custom_env.population = ['blahh']
       @custom_env.reset()
-      @custom_env.date.should.eql       0
-      @custom_env.tickSpeed.should.eql  1500
+      @custom_env.date.should.eql 0
+      @custom_env.tickSpeed.should.eql = 1500
       @custom_env.population.should.eql [@test_entity]
 
   describe 'tick()', ->
