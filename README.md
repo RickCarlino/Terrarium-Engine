@@ -4,7 +4,13 @@
 (c) 2013, Rick Carlino. See enclosed MIT license. Pull requests welcome ;-)
 
 #### About
-This is a side project I am writing as a simulation engine for turn based games. It slightly resembles a discrete event simulation (DES) engine, but much more simple.
+This is a side project I wrote as a simulation engine for turn based games. It slightly resembles a discrete event simulation (DES) engine, but much more simple.
+
+#### Developer Setup
+
+1. `npm install`
+2. `gulp`
+3. Develop to your hearts content- Coffeescript will be auto compiled and tested.
 
 #### Concepts
 The codebase provides two classes, which are intended to be used for derived classes. My goal is to make this project DOM and Application agnostic. I have a bias towards turn based simulation when it is not possible to be application agnostic.
@@ -43,7 +49,3 @@ Player2 (Random): 339
 Player1 (Rock Only): 339
 
 Player2 (Random): 318
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rickcarlino/terrarium-engine/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

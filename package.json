@@ -1,0 +1,38 @@
+{
+  "name": "Terrarium-Engine",
+  "version": "1.0.0",
+  "description": "A game simulator that almost looks like a discrete event simulator (DES).",
+  "main": "bin/terrarium.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rickcarlino/Terrarium-Engine.git"
+  },
+  "keywords": [
+    "game",
+    "simulation",
+    "simulation",
+    "engine"
+  ],
+  "author": "Rick Carlino",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rickcarlino/Terrarium-Engine/issues"
+  },
+  "homepage": "https://github.com/rickcarlino/Terrarium-Engine",
+  "devDependencies": {
+    "mocha": "*",
+    "gulp": "*",
+    "gulp-coffee" : "*",
+    "gulp-util" : "*",
+    "gulp-mocha" : "*"
+  },
+  "dependencies": {}
+}
